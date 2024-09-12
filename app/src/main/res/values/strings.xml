@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Movies Compose</string>
+    <string name="title_activity_detail_movies">DetailMoviesActivity</string>
+</resources>
