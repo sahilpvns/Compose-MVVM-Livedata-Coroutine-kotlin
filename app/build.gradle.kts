@@ -73,13 +73,8 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.3.0")
 
     // Viewmodel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
-
-    // okhttp
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.5")
 
     // Image loading data
-    implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation ("com.github.bumptech.glide:compose:1.0.0-alpha.1")
 }
