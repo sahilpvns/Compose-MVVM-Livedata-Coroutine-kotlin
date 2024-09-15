@@ -39,7 +39,7 @@ class DetailMoviesActivity : ComponentActivity() {
  fun MoviesDetailLayout(movies: DetailMoviesResponse?) {
      Column (modifier = Modifier.padding(16.dp)){
          GlideImage(model = movies?.Poster, contentDescription = movies?.Title,
-             modifier = Modifier.height(250.dp),
+             modifier = Modifier.height(350.dp),
              alignment = Alignment.TopCenter)
 
          Text(text = movies?.Title ?: "",
