@@ -11,7 +11,7 @@ interface MoviesInterface {
     suspend fun getMovies(
         @Query("apikey") apiKey: String = "b87de33c",
         @Query("s") query: String,
-        @Query("page") page: Int = 1, ) : MoviesResponse
+        @Query("page") page: Int = 1) : MoviesResponse
 
 
     // http://www.omdbapi.com/?i={imdbID}&apikey={API_KEY}

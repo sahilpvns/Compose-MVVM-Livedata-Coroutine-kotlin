@@ -38,22 +38,25 @@ class DetailMoviesActivity : ComponentActivity() {
 @Composable
  fun MoviesDetailLayout(movies: DetailMoviesResponse?) {
      Column (modifier = Modifier.padding(16.dp)){
-         GlideImage(model = movies?.Poster, contentDescription = movies?.Title, Modifier.height(250.dp), Alignment.TopCenter)
+         GlideImage(model = movies?.Poster, contentDescription = movies?.Title,
+             modifier = Modifier.height(250.dp),
+             alignment = Alignment.TopCenter)
 
-         Text(text = movies?.Title.toString(),
+         Text(text = movies?.Title ?: "",
              modifier = Modifier.padding(top = 16.dp),
              fontWeight = FontWeight.Bold)
 
-         Text(text = movies?.Year.toString())
-         Text(text = movies?.Rated.toString())
-         Text(text = movies?.Released.toString())
-         Text(text = movies?.Genre.toString())
-         Text(text = movies?.Actors.toString())
-         Text(text = movies?.Language.toString())
-         Text(text = movies?.Country.toString())
-         Text(text = movies?.Awards.toString())
-         Text(text = movies?.imdbRating.toString())
-         Text(text = movies?.imdbVotes.toString())
-
+         Text(text = movies?.Year ?: "")
+         Text(text = movies?.Rated ?: "")
+         Text(text = movies?.Released ?: "")
+         Text(text = movies?.Runtime ?: "")
+         Text(text = movies?.Genre ?: "")
+         Text(text = movies?.Director ?: "")
+         Text(text = movies?.Writer ?: "")
+         Text(text = movies?.Actors ?: "")
+         Text(text = movies?.Plot ?: "")
+         Text(text = movies?.Language ?: "")
+         Text(text = movies?.Country ?: "")
+         Text(text = movies?.Awards ?: "")
      }
 }
