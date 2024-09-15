@@ -18,7 +18,7 @@ class MoviesViewModel : ViewModel() {
                 if (response.Response == "True") {
                     moviesList.postValue(response.Search)
                 } else {
-                    errorMessage.postValue("No Data Found")
+                    errorMessage.postValue(response.Response)
                 }
             } catch (e: Exception) {
                 errorMessage.postValue(e.message)
@@ -37,7 +37,7 @@ class MoviesViewModel : ViewModel() {
                 if (response.Response == "True") {
                     detailMoviesList.postValue(response)
                 } else {
-                    errorMessage.postValue("No Data Found")
+                    errorMessage.postValue(response.Response)
                 }
             } catch (e: Exception) {
                 errorMessage.postValue(e.message)

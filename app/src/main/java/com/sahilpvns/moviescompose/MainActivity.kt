@@ -83,12 +83,11 @@ fun MovieCard(movies: Search) {
             putExtra("imdbID", movies.imdbID)
         }
         context.startActivity(intent)
-
     }) {
-        Row(modifier = Modifier.padding(16.dp)) {
+        Row {
             GlideImage(model = movies.Poster, contentDescription = movies.Title)
 
-            Column(Modifier.padding(start = 16.dp)) {
+            Column(Modifier.padding(8.dp)) {
                 Text(text = movies.Title, fontWeight = FontWeight.Bold)
                 Text(text = movies.imdbID)
                 Text(text = movies.Year)
