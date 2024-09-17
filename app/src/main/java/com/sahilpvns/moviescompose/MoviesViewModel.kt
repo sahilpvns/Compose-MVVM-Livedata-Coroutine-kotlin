@@ -8,7 +8,9 @@ import kotlinx.coroutines.launch
 
 class MoviesViewModel : ViewModel() {
     private val repository = MoviesRepository()
-    private val errorMessage = MutableLiveData<String>()
+
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String> = _errorMessage
 
     private val _moviesList = MutableLiveData<List<Search>>()
     val moviesList: LiveData<List<Search>> = _moviesList
@@ -20,10 +22,10 @@ class MoviesViewModel : ViewModel() {
                 if (response.Response == "True") {
                     _moviesList.postValue(response.Search)
                 } else {
-                    errorMessage.postValue(response.Response)
+                    _errorMessage.postValue("No movies found")
                 }
             } catch (e: Exception) {
-                errorMessage.postValue(e.message)
+                _errorMessage.postValue(e.message)
             }
 
         }
@@ -40,10 +42,10 @@ class MoviesViewModel : ViewModel() {
                 if (response.Response == "True") {
                     _detailMoviesList.postValue(response)
                 } else {
-                    errorMessage.postValue(response.Response)
+                    _errorMessage.postValue("No movies found")
                 }
             } catch (e: Exception) {
-                errorMessage.postValue(e.message)
+                _errorMessage.postValue(e.message)
             }
 
         }

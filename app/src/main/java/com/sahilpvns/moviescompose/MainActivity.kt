@@ -35,17 +35,21 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val movies by viewModel.moviesList.observeAsState(emptyList())
-            MoviesScreen(movies, viewModel)
+            val errorMessage by viewModel.errorMessage.observeAsState("")
+            MoviesScreen(movies, viewModel, errorMessage)
         }
     }
 
 }
 
 @Composable
-fun MoviesScreen(movies: List<Search>, viewModel: MoviesViewModel) {
+fun MoviesScreen(movies: List<Search>, viewModel: MoviesViewModel, errorMessage: String) {
     Column {
         SearchMovies(viewModel)
         MovieListScreen(movies)
+        Text(text = errorMessage,
+            modifier = Modifier.padding(8.dp).fillMaxWidth(),
+            fontWeight = FontWeight.Bold)
     }
 
 }
