@@ -1,5 +1,6 @@
 package com.sahilpvns.moviescompose
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,16 +8,17 @@ import kotlinx.coroutines.launch
 
 class MoviesViewModel : ViewModel() {
     private val repository = MoviesRepository()
-    val errorMessage = MutableLiveData<String>()
+    private val errorMessage = MutableLiveData<String>()
 
-    val moviesList = MutableLiveData<List<Search>>()
+    private val _moviesList = MutableLiveData<List<Search>>()
+    val moviesList: LiveData<List<Search>> = _moviesList
 
     fun fetchMovies(query: String) {
         viewModelScope.launch {
             try {
                 val response = repository.getMovies(query)
                 if (response.Response == "True") {
-                    moviesList.postValue(response.Search)
+                    _moviesList.postValue(response.Search)
                 } else {
                     errorMessage.postValue(response.Response)
                 }
@@ -28,14 +30,15 @@ class MoviesViewModel : ViewModel() {
     }
 
 
-    val detailMoviesList = MutableLiveData<DetailMoviesResponse>()
+    private val _detailMoviesList = MutableLiveData<DetailMoviesResponse>()
+    val detailMoviesList: LiveData<DetailMoviesResponse> = _detailMoviesList
 
     fun getDetailMovies(imdbID: String) {
         viewModelScope.launch {
             try {
                 val response = repository.getDetailsMovies(imdbID)
                 if (response.Response == "True") {
-                    detailMoviesList.postValue(response)
+                    _detailMoviesList.postValue(response)
                 } else {
                     errorMessage.postValue(response.Response)
                 }

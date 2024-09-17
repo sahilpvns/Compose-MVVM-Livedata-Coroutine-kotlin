@@ -8,7 +8,7 @@ class MoviesRepository {
     }
 
     suspend fun getDetailsMovies(imdbID: String): DetailMoviesResponse {
-        return apiService.getDetailsMovies(imdbID)
+        return apiService.getDetailsMovies(imdbID = imdbID)
     }
 
 

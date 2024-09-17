@@ -89,7 +89,6 @@ fun MovieCard(movies: Search) {
 
             Column(Modifier.padding(8.dp)) {
                 Text(text = movies.Title, fontWeight = FontWeight.Bold)
-                Text(text = movies.imdbID)
                 Text(text = movies.Year)
                 Text(text = movies.Type)
             }
