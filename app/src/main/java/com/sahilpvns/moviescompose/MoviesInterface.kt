@@ -11,7 +11,8 @@ interface MoviesInterface {
     suspend fun getMovies(
         @Query("apikey") apiKey: String = "b87de33c",
         @Query("s") query: String,
-        @Query("page") page: Int = 1) : MoviesResponse
+        @Query("page") page: Int = 1
+    ): MoviesResponse
 
 
     // http://www.omdbapi.com/?i=tt15354916&apikey=b87de33c
@@ -19,6 +20,7 @@ interface MoviesInterface {
     @GET("/")
     suspend fun getDetailsMovies(
         @Query("i") imdbID: String,
-        @Query("apikey") apiKey: String = "b87de33c"): DetailMoviesResponse
+        @Query("apikey") apiKey: String = "b87de33c"
+    ): DetailMoviesResponse
 
 }
