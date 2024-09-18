@@ -7,16 +7,19 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 class DetailMoviesActivity : ComponentActivity() {
     private val viewModel: MoviesViewModel by viewModels()
@@ -38,9 +41,12 @@ class DetailMoviesActivity : ComponentActivity() {
 @Composable
  fun MoviesDetailLayout(movies: DetailMoviesResponse?) {
      Column (modifier = Modifier.padding(16.dp)){
-         GlideImage(model = movies?.Poster, contentDescription = movies?.Title,
-             modifier = Modifier.height(350.dp),
-             alignment = Alignment.TopCenter)
+         GlideImage(
+             model = movies?.Poster,
+             contentDescription = movies?.Title,
+             modifier = Modifier.height(300.dp),
+             alignment = Alignment.TopCenter,
+         )
 
          Text(text = movies?.Title ?: "",
              modifier = Modifier.padding(top = 16.dp),
