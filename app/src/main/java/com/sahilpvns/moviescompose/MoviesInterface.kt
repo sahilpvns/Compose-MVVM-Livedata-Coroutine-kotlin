@@ -14,7 +14,7 @@ interface MoviesInterface {
         @Query("page") page: Int = 1) : MoviesResponse
 
 
-    // http://www.omdbapi.com/?i={imdbID}&apikey=b87de33c
+    // http://www.omdbapi.com/?i=tt15354916&apikey=b87de33c
 
     @GET("/")
     suspend fun getDetailsMovies(
