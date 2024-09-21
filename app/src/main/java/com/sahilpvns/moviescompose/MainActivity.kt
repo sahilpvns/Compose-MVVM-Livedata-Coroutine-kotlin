@@ -7,10 +7,14 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -21,6 +25,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -70,8 +75,8 @@ fun SearchMovies(viewModel: MoviesViewModel) {
 
 @Composable
 fun MovieListScreen(movies: List<Search>) {
-    LazyColumn {
-        items(movies) {
+    LazyVerticalGrid(GridCells.Fixed(2)){
+        items(movies){
             MovieCard(it)
         }
     }
@@ -82,20 +87,24 @@ fun MovieListScreen(movies: List<Search>) {
 @Composable
 fun MovieCard(movies: Search) {
     val context = LocalContext.current
-    Card(modifier = Modifier.padding(8.dp).fillMaxWidth(), onClick = {
+    Card(modifier = Modifier.padding(8.dp).fillMaxWidth().height(300.dp), onClick = {
         val intent = Intent(context, DetailMoviesActivity::class.java).apply {
             putExtra("imdbID", movies.imdbID)
         }
         context.startActivity(intent)
     }) {
-        Row {
-            GlideImage(model = movies.Poster, contentDescription = movies.Title)
+        Column(Modifier.padding(8.dp) ){
+            GlideImage(model = movies.Poster,
+                contentDescription = movies.Title,
+                modifier = Modifier.height(200.dp),
+                contentScale = ContentScale.FillBounds)
 
-            Column(Modifier.padding(8.dp)) {
-                Text(text = movies.Title, fontWeight = FontWeight.Bold)
+                Text(text = movies.Title,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(top = 4.dp))
                 Text(text = movies.Year)
                 Text(text = movies.Type)
-            }
+
         }
 
     }
