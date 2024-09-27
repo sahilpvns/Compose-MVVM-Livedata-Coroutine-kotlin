@@ -20,12 +20,12 @@ class MoviesViewModel : ViewModel() {
             try {
                 val response = repository.getMovies(query)
                 if (response.Response == "True") {
-                    _moviesList.postValue(response.Search)
+                    _moviesList.value = response.Search
                 } else {
-                    _errorMessage.postValue("No movies found")
+                    _errorMessage.value = "No movies found"
                 }
             } catch (e: Exception) {
-                _errorMessage.postValue(e.message)
+                _errorMessage.value = e.message
             }
 
         }
@@ -40,12 +40,12 @@ class MoviesViewModel : ViewModel() {
             try {
                 val response = repository.getDetailsMovies(imdbID)
                 if (response.Response == "True") {
-                    _detailMoviesList.postValue(response)
+                    _detailMoviesList.value = response
                 } else {
-                    _errorMessage.postValue("No movies found")
+                    _errorMessage.value = "No movies found"
                 }
             } catch (e: Exception) {
-                _errorMessage.postValue(e.message)
+                _errorMessage.value = e.message
             }
 
         }
