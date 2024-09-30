@@ -1,4 +1,4 @@
-package com.sahilpvns.moviescompose
+package com.sahilpvns.moviescompose.ui.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,19 +7,19 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
+import com.sahilpvns.moviescompose.dataLayers.DetailMoviesResponse
+import com.sahilpvns.moviescompose.dataLayers.MoviesViewModel
+import com.sahilpvns.moviescompose.domainLayers.NetworkResponse
 
 class DetailMoviesActivity : ComponentActivity() {
     private val viewModel: MoviesViewModel by viewModels()
@@ -30,10 +30,16 @@ class DetailMoviesActivity : ComponentActivity() {
             viewModel.getDetailMovies(imdbID?: "")
 
             val getDetailMovies by viewModel.detailMoviesList.observeAsState()
-            MoviesDetailLayout(getDetailMovies)
+            MoviesDetailLayout(
+                when (getDetailMovies) {
+                    is NetworkResponse.Success -> (getDetailMovies as NetworkResponse.Success<DetailMoviesResponse>).data
+                    is NetworkResponse.Error -> null
+                    is NetworkResponse.Loading -> null
+                    else -> null
+                }
+            )
         }
     }
-
 
 }
 

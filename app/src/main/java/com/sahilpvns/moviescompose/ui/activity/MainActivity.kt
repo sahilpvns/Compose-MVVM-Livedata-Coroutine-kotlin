@@ -1,4 +1,4 @@
-package com.sahilpvns.moviescompose
+package com.sahilpvns.moviescompose.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +29,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.sahilpvns.moviescompose.dataLayers.MoviesViewModel
+import com.sahilpvns.moviescompose.dataLayers.Search
+import com.sahilpvns.moviescompose.domainLayers.NetworkResponse
 
 
 class MainActivity : ComponentActivity() {
@@ -36,22 +40,31 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val movies by viewModel.moviesList.observeAsState(emptyList())
-            val errorMessage by viewModel.errorMessage.observeAsState("")
-            MoviesScreen(movies, viewModel, errorMessage)
+            val movies by viewModel.moviesList.observeAsState()
+            MoviesScreen(movies, viewModel)
         }
     }
 
 }
 
 @Composable
-fun MoviesScreen(movies: List<Search>, viewModel: MoviesViewModel, errorMessage: String) {
+fun MoviesScreen(movies: NetworkResponse<List<Search>>?, viewModel: MoviesViewModel) {
     Column {
         SearchMovies(viewModel)
-        MovieListScreen(movies)
-        Text(text = errorMessage,
-            modifier = Modifier.padding(8.dp).fillMaxWidth(),
-            fontWeight = FontWeight.Bold)
+        MovieListScreen(
+            when (movies) {
+                is NetworkResponse.Success -> movies.data
+                is NetworkResponse.Error -> {
+                    Text(text = movies.message)
+                    emptyList()
+                }
+                is NetworkResponse.Loading -> {
+                    CircularProgressIndicator()
+                    emptyList()
+                }
+                else -> emptyList()
+            }
+        )
     }
 
 }

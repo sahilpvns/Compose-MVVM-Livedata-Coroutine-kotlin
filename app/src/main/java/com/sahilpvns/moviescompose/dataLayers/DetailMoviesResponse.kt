@@ -1,4 +1,4 @@
-package com.sahilpvns.moviescompose
+package com.sahilpvns.moviescompose.dataLayers
 
 data class DetailMoviesResponse(
     val Title: String,
