@@ -18,14 +18,12 @@ class MoviesViewModel : ViewModel() {
     fun fetchMovies(query: String) {
         viewModelScope.launch {
             try {
-                    val response = repository.getMovies(query)
-                    if (response.Response == "True") {
-                        _moviesList.value = response.Search
-                    } else {
-                        _errorMessage.value = "No movies found"
-                    }
-
-
+                val response = repository.getMovies(query)
+                if (response.Response == "True") {
+                    _moviesList.value = response.Search
+                } else {
+                    _errorMessage.value = "No movies found"
+                }
             } catch (e: Exception) {
                 _errorMessage.value = e.message
             }
