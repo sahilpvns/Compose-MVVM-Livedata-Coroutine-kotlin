@@ -74,6 +74,7 @@ dependencies {
 
     // Viewmodel
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.5")
+    implementation ("androidx.compose.runtime:runtime-livedata:1.7.1")
 
     // Image loading data
     implementation ("com.github.bumptech.glide:compose:1.0.0-alpha.1")
